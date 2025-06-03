@@ -32,7 +32,17 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         @foreach($kebijakans as $k)
         <div class="bg-white rounded-lg shadow p-4">
-            <h4 class="text-lg font-semibold mb-2">📄 {{ $k->judul }}</h4>
+            <h4 class="text-lg font-semibold mb-2 truncate">📄 {{ $k->judul }}</h4>
+
+            {{-- Preview PDF --}}
+            <div class="h-48 border mb-3 rounded overflow-hidden">
+                <iframe 
+                    src="{{ asset('storage/' . $k->file_path) }}#toolbar=0&navpanes=0&scrollbar=0" 
+                    class="w-full h-full" 
+                    frameborder="0">
+                </iframe>
+            </div>
+
             <a href="{{ asset('storage/' . $k->file_path) }}" target="_blank" class="text-blue-600 hover:underline">Lihat File</a><br>
             <a href="{{ asset('storage/' . $k->file_path) }}" download class="text-sm mt-2 inline-block px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Unduh</a>
 

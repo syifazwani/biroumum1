@@ -20,7 +20,7 @@
   @include('partials.navbar')
 
   <main class="max-w-7xl mx-auto px-4 py-10">
-    <h2 class="text-3xl font-bold text-center text-[#0077b6] mb-10">🧭 Informasi Balai Kota Jakarta</h2>
+    <h2 class="text-3xl font-bold text-center text-[#0077b6] mb-10">Informasi Balai Kota Jakarta</h2>
 
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Sidebar -->
