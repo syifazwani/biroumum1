@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
-    protected $fillable = ['name'];
-    public function photos() {
-        return $this->hasMany(Photo::class);
-    }
-    public function videos() {
-        return $this->hasMany(Video::class);
+    public $timestamps = false; // tambahkan ini
+
+    protected $fillable = ['title', 'cover_image'];
+
+    public function photos()
+    {
+        return $this->hasMany(AlbumPhoto::class);
     }
 }
-
 

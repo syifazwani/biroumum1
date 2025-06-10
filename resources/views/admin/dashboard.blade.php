@@ -47,22 +47,65 @@
       class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
       onclick="location.href='{{ route('admin.organisasi') }}'"
     >
-      PPID
-    </button>
-
-    <button
-      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
-      onclick="location.href='{{ route('admin.organisasi') }}'"
-    >
       Informasi
     </button>
 
     <button
       class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
-      onclick="location.href='{{ route('admin.organisasi') }}'"
+      onclick="location.href='{{ route('foto.index') }}'"
     >
-      Foto & Video
+      Foto
     </button>
+    
+    <button
+      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
+      onclick="location.href='{{ route('album.index') }}'"
+    >
+      Album
+    </button>
+
+    <button
+      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
+      onclick="location.href='{{ route('videos.index') }}'"
+    >
+      Video
+    </button>
+
+    <button
+      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
+      onclick="location.href='{{ route('admin.berita.index') }}'"
+    >
+      Berita
+    </button>
+
+    <button
+      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
+      onclick="location.href='{{ route('admin.visi_misi.index') }}'"
+    >
+      Visi-misi
+    </button>
+
+    <button
+      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
+      onclick="location.href='admin/dasarhukum'"
+    >
+      Dasar Hukum
+    </button>
+
+    <button
+      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
+      onclick="location.href='{{ route('tugasfungsi.index') }}'"
+    >
+      tugas dan fungsi
+    </button>
+
+    <button
+      class="bg-blue-600 text-white py-4 rounded-full shadow hover:bg-blue-700 transition"
+      onclick="location.href='admin/strukturorganisasippid'"
+    >
+      struktur ppid
+    </button>
+
 
   </div>
 

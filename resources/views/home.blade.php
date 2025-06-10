@@ -13,9 +13,9 @@
 
     @include('partials.navbar')
 
-    <main class="flex-grow px-5 py-10 space-y-20">
+    <main class="container mx-auto px-10 py-10 space-y-20">
       <!-- Hero Section -->
-      <section class="relative rounded-3xl overflow-hidden shadow-lg h-[300px] md:h-[400px]" data-aos="fade-down">
+<section class="relative rounded-3xl overflow-hidden shadow-lg h-[300px] md:h-[400px]" data-aos="fade-down">
         <div class="swiper heroSwiper h-full w-full">
           <div class="swiper-wrapper">
             <div class="swiper-slide bg-cover bg-center" style="background-image: url('{{ asset('img/DJI_0135.jpg') }}');"></div>
@@ -29,50 +29,87 @@
         </div>
       </section>
 
-      <!-- Visi & Misi -->
-      <section class="space-y-20">
-        <div class="md:flex items-center gap-10" data-aos="fade-right">
-          <div class="md:w-1/2">
-            <h2 class="text-2xl font-semibold text-[#0077b6] mb-3">Visi</h2>
-            <p>Menjadi biro yang profesional, akuntabel, dan berorientasi pelayanan prima di lingkungan Pemerintah Provinsi DKI Jakarta.</p>
-          </div>
-          <div class="md:w-1/2">
-            <img src="https://source.unsplash.com/600x400/?office" alt="Visi" class="rounded-xl shadow-lg">
-          </div>
-        </div>
-
-        <div class="md:flex items-center gap-10 flex-row-reverse" data-aos="fade-left">
-          <div class="md:w-1/2">
-            <h2 class="text-2xl font-semibold text-[#0077b6] mb-3">Misi</h2>
-            <ul class="list-disc pl-5 space-y-2">
-              <li>Menyelenggarakan layanan administrasi umum yang efisien dan efektif.</li>
-              <li>Menunjang kinerja pimpinan melalui layanan tata usaha yang optimal.</li>
-              <li>Meningkatkan kapasitas dan kualitas sumber daya manusia biro.</li>
-            </ul>
-          </div>
-          <div class="md:w-1/2">
-            <img src="https://source.unsplash.com/600x400/?mission" alt="Misi" class="rounded-xl shadow-lg">
-          </div>
-        </div>
-      </section>
-
-      <!-- Tombol Video Profil -->
+      <!-- Tab Layanan Online -->
+<section class="space-y-4" data-aos="fade-up">
+  <h2 class="text-3xl font-bold text-[#0077b6] text-center">Layanan Online</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-4">
+    <a href="https://eoffice.jakarta.go.id/index.php/login/jejaksurat" target="_blank" class=" bg-gradient-to-r from-[#0077b6] to-[#00b4d8] text-white py-4 px-6 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 text-center font-semibold">
+      Jejak Surat
+    </a>
+    <a href="https://epesanruangan.jakarta.go.id/user/login" target="_blank" class="bg-gradient-to-r from-[#0077b6] to-[#00b4d8] text-white py-4 px-6 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 text-center font-semibold">
+      Pelayanan Gedung
+    </a>
+    <a href="#" class="bg-gradient-to-r from-[#0077b6] to-[#00b4d8] text-white py-4 px-6 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 text-center font-semibold">
+      Dukungan Acara
+    </a>
+    <a href="#" class="bg-gradient-to-r from-[#0077b6] to-[#00b4d8] text-white py-4 px-6 rounded-xl shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 text-center font-semibold">
+      Produk Hukum
+    </a>
+  </div>
+</section>
 
 
-      <!-- Fungsi dan Tugas -->
-      <section data-aos="zoom-in-up" class="bg-white p-10 rounded-2xl shadow-lg">
-        <h2 class="text-2xl font-semibold text-[#0077b6] mb-6 text-center">Fungsi dan Tugas</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-[#f0fbfd] p-6 rounded-xl shadow hover:shadow-lg transition duration-300" data-aos="flip-left">
-            <h3 class="text-xl font-semibold mb-2">Fungsi</h3>
-            <p>Mengelola dan menyelenggarakan urusan tata usaha, layanan umum, kepegawaian, serta pengelolaan rumah tangga Sekretariat Daerah.</p>
-          </div>
-          <div class="bg-[#f0fbfd] p-6 rounded-xl shadow hover:shadow-lg transition duration-300" data-aos="flip-right">
-            <h3 class="text-xl font-semibold mb-2">Tugas</h3>
-            <p>Melaksanakan penyiapan bahan kebijakan, koordinasi, monitoring, dan evaluasi pelaksanaan tugas-tugas Sekretariat Daerah sesuai bidangnya.</p>
-          </div>
-        </div>
-      </section>
+<!-- Tentang Kami -->
+<section class="bg-white p-10 rounded-2xl shadow-lg relative flex flex-col md:flex-row gap-8 items-center" data-aos="fade-up">
+  <img src="{{ asset('img/DJI_0119.jpg') }}" alt="" class="w-[400px] rounded-xl shadow-md object-cover">
+
+  <div class="text-gray-800 max-w-3xl">
+    <h2 class="text-3xl font-bold text-[#0077b6] mb-4 text-left">Tentang Kami</h2>
+    <p class="text-justify leading-relaxed mb-4">
+      Biro Umum dan Administrasi Sekretariat Daerah Provinsi DKI Jakarta merupakan unit kerja yang menangani layanan umum, tata usaha pimpinan, serta administrasi kepegawaian di lingkungan Sekretariat Daerah. Kami berkomitmen untuk memberikan pelayanan yang profesional, transparan, dan akuntabel demi mendukung tata kelola pemerintahan yang baik.
+    </p>
+    <p class="text-justify leading-relaxed mb-2">
+      Biro ini terbagi atas layanan internal dan eksternal, antara lain:
+    </p>
+    <ul class="list-disc pl-6 text-justify leading-relaxed">
+      <li>Layanan Persuratan</li>
+      <li>Layanan Pemeliharaan</li>
+      <li>Pengamanan dan perawatan bangunan di lingkup Balai Kota dan Rumah Dinas pimpinan</li>
+      <li>Layanan kebersihan bangunan di Balai Agung dan Balai Kota, dan lain-lain</li>
+    </ul>
+  </div>
+</section>
+
+
+
+<!-- Ada Apa di Balai Kota -->
+<section class="bg-white p-10 rounded-2xl shadow-lg" data-aos="fade-up">
+  <h2 class="text-3xl font-bold text-[#0077b6] mb-6 text-center">Ada Apa di Balai Kota?</h2>
+  <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+    <div class="flex-1">
+      <p class="mb-4 text-gray-800 text-justify">
+        Ketika kita berkunjung ke Balaikota pasti kita bertanya-tanya ada apa saja sih di Balaikota Jakarta? Nah berikut ini kami informasikan hal-hal menarik yang dapat anda temui di Balaikota Jakarta.
+      </p>
+      <ul class="list-disc text-gray-700 text-lg leading-relaxed pl-6">
+        <li>Ada Jakarta Innovation Days di Balai Kota DKI Jakarta</li>
+        <li>Ada Bank Sampah Si Pitung di Balai Kota DKI Jakarta</li>
+        <li>Ada Bazar Balaikota di Balaikota DKI Jakarta</li>
+        <li>Ada Balai Agung di Balaikota DKI Jakarta</li>
+        <li>Ada Jakarta Smart City Lounge</li>
+      </ul>
+    </div>
+    <div class="md:w-[400px] w-full">
+      <img src="{{ asset('img/DJI_0135.jpg') }}" alt="Balai Kota" class="rounded-xl shadow-md w-full object-cover">
+    </div>
+
+  </div>
+  <button class="px-8 w-max h-10 bg-cyan-400 rounded-full text-white"><a href="informasi">Jelajah</a></button>
+</section>
+
+
+
+<!-- Galeri Foto -->
+<section class="bg-white p-10 rounded-2xl shadow-lg" data-aos="fade-up">
+  <h2 class="text-3xl font-bold text-[#0077b6] mb-6 text-center">Galeri Foto</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <img src="{{ asset('img/DJI_0135.jpg') }}" alt="Galeri 1" class="rounded-xl shadow-md hover:scale-105 transition-transform duration-300">
+    <img src="{{ asset('img/DJI_0119.jpg') }}" alt="Galeri 2" class="rounded-xl shadow-md hover:scale-105 transition-transform duration-300">
+    <img src="{{ asset('img/DJI_0119.jpg') }}" alt="Galeri 3" class="rounded-xl shadow-md hover:scale-105 transition-transform duration-300">
+  </div>
+  <a href='galeri/foto'><p class="text-end pt-10 text-sky-400">Lihat lainnya >></p></a>
+</section>
+
+
     </main>
 
 
