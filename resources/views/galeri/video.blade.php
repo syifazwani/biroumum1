@@ -12,7 +12,9 @@
 
   @include('partials.navbar')
 
-  <h1 class="text-center text-2xl font-bold m-6">Galeri Biro Umum dan ASD</h1>
+    <div class="min-h-screen w-full flex flex-col items-center py-10">
+
+<h1 class="text-4xl font-extrabold text-blue-800 items-center drop-shadow-lg animate-fade-in">Galeri Album</h1>
 
 
 
@@ -30,6 +32,7 @@
 </video>
 
     @endforeach
+  </div>
   </div>
 </div>
 

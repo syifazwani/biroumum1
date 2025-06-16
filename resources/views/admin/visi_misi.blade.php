@@ -1,58 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6">
+<div class="p-6 max-w-6xl mx-auto">
+    {{-- Tombol Kembali --}}
     <a href="{{ route('admin.dashboard') }}">
-      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
-        ← Kembali ke Admin
-      </button>
-    <h2 class="text-2xl font-bold mb-4">Manajemen Visi dan Misi</h2>
+        <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2 transition duration-300 ease-in-out">
+            ← Kembali ke Admin
+        </button>
+    </a>
 
+    <h2 class="text-3xl font-extrabold mb-6 text-center text-gray-800 animate-fade-in">Manajemen Visi dan Misi</h2>
+
+    {{-- Pesan Sukses --}}
     @if(session('success'))
-        <div class="bg-green-200 text-green-800 p-3 rounded mb-4">
+        <div class="bg-green-100 border border-green-400 text-green-800 p-3 rounded mb-6 animate-pulse">
             {{ session('success') }}
         </div>
     @endif
 
     {{-- Form Upload --}}
-    <form action="{{ route('admin.visi_misi.store') }}" method="POST" enctype="multipart/form-data" class="mb-6">
+    <form action="{{ route('admin.visi_misi.store') }}" method="POST" enctype="multipart/form-data" 
+          class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg space-y-4 hover:shadow-2xl transition duration-300">
         @csrf
-        <label class="block mb-2 font-semibold">Nama File</label>
-        <input type="text" name="nama_file" required class="border p-2 rounded w-full mb-2" />
-
-        <label class="block mb-2 font-semibold">Unggah File PDF</label>
-        <input type="file" name="file" required accept=".pdf" class="border p-2 rounded w-full mb-2" />
-
-        <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">Upload</button>
+        <div>
+            <label class="block text-gray-700 font-semibold mb-1">Nama File</label>
+            <input type="text" name="nama_file" required placeholder="Masukkan Nama File" 
+                   class="w-full border border-gray-300 rounded px-4 py-2 bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        </div>
+        <div>
+            <label class="block text-gray-700 font-semibold mb-1">Unggah File PDF</label>
+            <input type="file" name="file" required accept=".pdf" 
+                   class="w-full border border-gray-300 rounded px-4 py-2 bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 transition duration-300 ease-in-out">
+                Upload Visi & Misi
+            </button>
+        </div>
     </form>
 
+    {{-- Daftar File --}}
     @if(count($visi_misi) > 0)
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 animate-fade-in-up">
         @foreach($visi_misi as $item)
-        <div class="bg-white rounded-lg shadow p-4">
-            <h4 class="text-lg font-semibold mb-2 truncate">📄 {{ $item->nama_file }}</h4>
+        <div class="bg-white rounded-2xl shadow-md p-4 flex flex-col hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out">
+            <h4 class="text-lg font-semibold mb-2 text-gray-800 truncate">📄 {{ $item->nama_file }}</h4>
 
-            <div class="h-48 border mb-3 rounded overflow-hidden">
-                <iframe
-                    src="{{ asset('storage/' . $item->path) }}#toolbar=0"
-                    class="w-full h-full"
-                    frameborder="0">
-                </iframe>
+            <div class="h-48 border mb-3 rounded overflow-hidden bg-gray-50">
+                <iframe src="{{ asset('storage/' . $item->path) }}#toolbar=0" class="w-full h-full" frameborder="0"></iframe>
             </div>
 
-            <a href="{{ Storage::url($item->path) }}" target="_blank" class="text-blue-600 hover:underline">Lihat / Download</a> |
-            <a href="{{ route('admin.visi_misi.edit', $item->id) }}" class="text-yellow-600 hover:underline">Edit</a> |
-
-            <form action="{{ route('admin.visi_misi.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus file ini?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-600 hover:underline">Hapus</button>
-            </form>
+            <div class="flex justify-between items-center text-sm mt-auto">
+                <a href="{{ Storage::url($item->path) }}" target="_blank" 
+                   class="text-blue-600 hover:underline transition">Lihat / Download</a>
+                <a href="{{ route('admin.visi_misi.edit', $item->id) }}" 
+                   class="text-yellow-600 hover:underline transition">Edit</a>
+                <form action="{{ route('admin.visi_misi.destroy', $item->id) }}" method="POST" class="inline-block" 
+                      onsubmit="return confirm('Yakin ingin menghapus file ini?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-600 hover:underline transition">Hapus</button>
+                </form>
+            </div>
         </div>
         @endforeach
     </div>
     @else
-    <p>Tidak ada file visi dan misi yang tersedia.</p>
+        <p class="text-center text-gray-500 italic mt-6 animate-fade-in">Tidak ada file Visi dan Misi yang tersedia.</p>
     @endif
 </div>
 @endsection

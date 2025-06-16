@@ -1,50 +1,59 @@
-
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <a href="{{ route('admin.dashboard') }}">
-      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
-        ← Kembali ke Admin
-      </button>
-    <h1>Daftar Video</h1>
-    <a href="{{ route('videos.create') }}" class="btn btn-primary mb-3">Tambah Video</a>
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Daftar Video</h1>
+
+    <div class="mb-4 flex justify-between items-center">
+        <a href="{{ route('admin.dashboard') }}">
+            <button class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2 transition">
+                ← Kembali ke Admin
+            </button>
+        </a>
+        <a href="{{ route('videos.create') }}">
+            <button class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white transition">Tambah Video</button>
+        </a>
+    </div>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="mb-4 p-3 bg-green-200 text-green-800 rounded shadow">{{ session('success') }}</div>
     @endif
     @if(session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+        <div class="mb-4 p-3 bg-red-200 text-red-800 rounded shadow">{{ session('error') }}</div>
     @endif
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Judul</th>
-                <th>URL Video</th>
-                <th>Deskripsi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($videos as $video)
+    <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-300 text-gray-700">
+            <thead class="bg-gray-100 text-left">
                 <tr>
-                    <td>{{ $video->id }}</td>
-                    <td>{{ $video->title }}</td>
-                    <td><a href="{{ $video->video_url }}" target="_blank">{{ $video->video_url }}</a></td>
-                    <td>{{ $video->description }}</td>
-                    <td>
-                        <a href="{{ route('videos.edit', $video->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('videos.destroy', $video->id) }}" method="POST" style="display:inline-block" onsubmit="return confirm('Yakin ingin menghapus video ini?')">
+                    <th class="p-3 border">ID</th>
+                    <th class="p-3 border">Judul</th>
+                    <th class="p-3 border">URL Video</th>
+                    <th class="p-3 border">Deskripsi</th>
+                    <th class="p-3 border">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($videos as $video)
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="p-3 border">{{ $video->id }}</td>
+                    <td class="p-3 border font-semibold">{{ $video->title }}</td>
+                    <td class="p-3 border">
+                        <a href="{{ $video->video_url }}" target="_blank" class="text-blue-600 underline break-all">{{ $video->video_url }}</a>
+                    </td>
+                    <td class="p-3 border">{{ $video->description }}</td>
+                    <td class="p-3 border space-x-2">
+                        <a href="{{ route('videos.edit', $video->id) }}" class="inline-block bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition">Edit</a>
+                        <form action="{{ route('videos.destroy', $video->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus video ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition">Hapus</button>
                         </form>
                     </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
