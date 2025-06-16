@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ route('admin.dashboard') }}">
-<button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
-        ← Kembali ke Admin
-      </button>
 <div class="container">
     <a href="{{ route('album.create') }}" class="bg-green-500 text-white px-4 py-2 rounded">Tambah Album</a>
+ <a href="{{ route('admin.dashboard') }}">
+        <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+            ← Kembali ke Admin
+        </button>
 
     @if(session('success'))
         <div class="bg-green-100 text-green-800 p-3 mt-3">{{ session('success') }}</div>

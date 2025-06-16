@@ -106,7 +106,7 @@
     <img src="{{ asset('img/DJI_0119.jpg') }}" alt="Galeri 2" class="rounded-xl shadow-md hover:scale-105 transition-transform duration-300">
     <img src="{{ asset('img/DJI_0119.jpg') }}" alt="Galeri 3" class="rounded-xl shadow-md hover:scale-105 transition-transform duration-300">
   </div>
-  <a href='galeri/foto'><p class="text-end pt-10 text-sky-400">Lihat lainnya >></p></a>
+  <a href="{{ asset('foto&video') }}"><p class="text-end pt-10 text-sky-400">Lihat lainnya >></p></a>
 </section>
 
 

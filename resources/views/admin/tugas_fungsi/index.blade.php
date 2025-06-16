@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="mb-4">
+        <a href="{{ route('admin.dashboard') }}">
+      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+        ← Kembali ke Admin
+      </button>
         <h1 class="text-2xl font-bold">Tugas dan Fungsi</h1>
         <a href="{{ route('tugasfungsi.create') }}" class="mt-2 inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">+ Tambah File</a>
     </div>

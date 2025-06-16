@@ -2,10 +2,7 @@
 
 @section('content')
 <h1>Edit Foto</h1>
-<a href="{{ route('admin.dashboard') }}">
-<button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
-        ← Kembali ke Admin
-      </button>
+
 @if ($errors->any())
     <div>
         <ul>

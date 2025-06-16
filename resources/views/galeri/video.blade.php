@@ -7,7 +7,8 @@
   @vite(['resources/css/app.css'])
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-blue-50 text-gray-800 font-sans">
+<body class="bg-gray-100 text-black flex flex-col min-h-screen font-sans" style="background-image: url('{{ asset('img/batik.jpg') }}'); background-size: cover; background-position: center;">
+  <div class="flex flex-col min-h-screen bg-white/95">
 
   @include('partials.navbar')
 
@@ -20,13 +21,14 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-6 gap-5 mt-6">
     @foreach ($videos as $video)
       <video
-        src="{{ asset('vid/' . $video->video_url) }}"
-        controls
-        class="w-full rounded-lg object-cover"
-        preload="metadata"
-      >
-        Your browser does not support the video tag.
-      </video>
+  src="{{ Str::startsWith($video->video_url, 'http') ? $video->video_url : asset($video->video_url) }}"
+  controls
+  class="w-full rounded-lg object-cover"
+  preload="metadata"
+>
+  Browser tidak mendukung video.
+</video>
+
     @endforeach
   </div>
 </div>

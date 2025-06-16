@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container mx-auto p-6">
+    <a href="{{ route('admin.dashboard') }}">
+      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+        ← Kembali ke Admin
+      </button>
     <h1 class="text-3xl font-bold mb-6">Admin Dasar Hukum</h1>
 
     @if(session('success'))

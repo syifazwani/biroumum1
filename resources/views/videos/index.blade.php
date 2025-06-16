@@ -1,11 +1,12 @@
+
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ route('admin.dashboard') }}">
-<button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+<div class="container">
+    <a href="{{ route('admin.dashboard') }}">
+      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
         ← Kembali ke Admin
       </button>
-<div class="container">
     <h1>Daftar Video</h1>
     <a href="{{ route('videos.create') }}" class="btn btn-primary mb-3">Tambah Video</a>
 

@@ -31,13 +31,12 @@
         @endforeach
       </div>
 
-      {{-- Konten Tab --}}
       <div class="bg-white/90 shadow-xl rounded-xl p-6 space-y-10">
         {{-- Visi Misi --}}
         <div id="visi-misi" class="tab-content hidden">
           <h2 class="text-2xl font-bold text-blue-700 mb-4">Visi dan Misi</h2>
           @php
-              $pdf = \Illuminate\Support\Facades\DB::table('visi_misi')->orderBy('created_at', 'desc')->first();
+              $pdf = DB::table('visi_misi')->orderBy('created_at', 'desc')->first();
           @endphp
           @if ($pdf)
               <iframe src="{{ Storage::url($pdf->path) }}" class="w-full h-[600px] mb-4 border rounded shadow" frameborder="0"></iframe>
@@ -45,62 +44,68 @@
                   Download PDF
               </a>
           @else
-              <p class="text-gray-600 italic">Belum ada dokumen visi dan misi yang diunggah.</p>
+              <p class="text-gray-600 italic">Belum ada dokumen Visi dan Misi yang diunggah.</p>
           @endif
         </div>
 
-        {{-- Dasar Hukum --}}
+        {{-- Dasar Hukum (3 kolom) --}}
         <div id="dasar-hukum" class="tab-content hidden">
           <h2 class="text-2xl font-bold text-blue-700 mb-4">Dasar Hukum</h2>
-          <div class="bg-yellow-50 border border-yellow-300 rounded-lg p-6 shadow-sm">
-            @php
-                $pdfs = \Illuminate\Support\Facades\DB::table('dasar_hukum')->orderBy('created_at', 'desc')->get();
-            @endphp
-            @if ($pdfs->count() > 0)
-                <ul class="space-y-4">
-                    @foreach ($pdfs as $pdf)
-                        <li class="p-4 bg-white rounded shadow hover:bg-gray-50 transition">
-                            <div class="font-medium text-gray-800">{{ $pdf->nama_file }}</div>
-                            <a href="{{ Storage::url($pdf->path) }}" target="_blank" class="mt-2 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                                Download PDF
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-                <p class="text-gray-600 italic">Belum ada dokumen Dasar Hukum yang diunggah.</p>
-            @endif
-          </div>
+          @php
+              $pdfs = DB::table('dasar_hukum')->orderBy('created_at', 'desc')->get();
+          @endphp
+          @if ($pdfs->count() > 0)
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  @foreach ($pdfs as $pdf)
+                      <div class="bg-yellow-50 border border-yellow-300 rounded-lg p-4 shadow space-y-4">
+                          <div class="font-medium text-gray-800 truncate">{{ $pdf->nama_file }}</div>
+                          <iframe src="{{ Storage::url($pdf->path) }}" class="w-full h-[250px] border rounded" frameborder="0"></iframe>
+                          <a href="{{ Storage::url($pdf->path) }}" target="_blank" class="block text-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                              Download PDF
+                          </a>
+                      </div>
+                  @endforeach
+              </div>
+          @else
+              <p class="text-gray-600 italic">Belum ada dokumen Dasar Hukum yang diunggah.</p>
+          @endif
         </div>
 
-        {{-- Tugas dan Fungsi --}}
+        {{-- Tugas dan Fungsi (3 kolom) --}}
         <div id="tugas-fungsi" class="tab-content hidden">
           <h2 class="text-2xl font-bold text-blue-700 mb-4">Tugas dan Fungsi</h2>
           @php
-              $pdf = \Illuminate\Support\Facades\DB::table('tugas_fungsi')->orderBy('created_at', 'desc')->first();
+              $pdfs = DB::table('tugas_fungsi')->orderBy('created_at', 'desc')->get();
           @endphp
-          @if ($pdf)
-              <iframe src="{{ Storage::url($pdf->path) }}" class="w-full h-[600px] mb-4 border rounded shadow" frameborder="0"></iframe>
-              <a href="{{ Storage::url($pdf->path) }}" target="_blank" class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                  Download PDF
-              </a>
+          @if ($pdfs->count() > 0)
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  @foreach ($pdfs as $pdf)
+                      <div class="bg-green-50 border border-green-300 rounded-lg p-4 shadow space-y-4">
+                          <div class="font-medium text-gray-800 truncate">{{ $pdf->nama_file }}</div>
+                          <iframe src="{{ Storage::url($pdf->path) }}" class="w-full h-[250px] border rounded" frameborder="0"></iframe>
+                          <a href="{{ Storage::url($pdf->path) }}" target="_blank" class="block text-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                              Download PDF
+                          </a>
+                      </div>
+                  @endforeach
+              </div>
           @else
               <p class="text-gray-600 italic">Belum ada dokumen Tugas dan Fungsi yang diunggah.</p>
           @endif
         </div>
 
         {{-- Struktur Organisasi --}}
-        <div id="struktur" class="tab-content hidden">
-    <h2 class="text-2xl font-bold text-blue-700 mb-4">Struktur Organisasi PPID</h2>
-    @php
-        $struktur = DB::table('struktur_organisasi_ppid')->latest('id')->first();
-    @endphp
-    @if($struktur)
-        <img src="{{ asset('storage/' . $struktur->path) }}" alt="Struktur Organisasi PPID" class="rounded-lg shadow-lg max-w-full mx-auto">
-    @else
-        <p class="text-gray-600 italic">Belum ada gambar struktur organisasi.</p>
-    @endif
-</div>
+        <div id="struktur" class="tab-content hidden text-center">
+          <h2 class="text-2xl font-bold text-blue-700 mb-4">Struktur Organisasi PPID</h2>
+          @php
+              $struktur = DB::table('struktur_organisasi_ppid')->latest('id')->first();
+          @endphp
+          @if($struktur)
+              <img src="{{ asset('storage/' . $struktur->path) }}" alt="Struktur Organisasi PPID" class="rounded-lg shadow-lg max-w-full mx-auto">
+          @else
+              <p class="text-gray-600 italic">Belum ada gambar struktur organisasi.</p>
+          @endif
+        </div>
 
       </div>
     </section>
@@ -116,7 +121,6 @@
       event.target.classList.add('bg-blue-700');
     }
 
-    // Tampilkan tab pertama saat load
     document.addEventListener('DOMContentLoaded', () => {
       const firstTab = document.querySelector('.tab-content');
       if (firstTab) firstTab.classList.remove('hidden');

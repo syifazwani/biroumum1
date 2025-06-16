@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Daftar Berita</h1>
 <a href="{{ route('admin.dashboard') }}">
-<button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
         ← Kembali ke Admin
       </button>
+<h1>Daftar Berita</h1>
 <a href="{{ url('/admin/berita/create') }}" class="btn btn-primary mb-3">+ Tambah Berita</a>
 
 @if(session('success'))

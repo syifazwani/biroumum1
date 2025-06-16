@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="p-6">
+  <a href="{{ route('admin.dashboard') }}">
+      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+        ← Kembali ke Admin
+      </button>
   <h2 class="text-xl font-bold mb-4">Admin: Ada Apa di Balai Kota</h2>
   <a href="/admin/balai/create" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Tambah Konten</a>
   <table class="w-full table-auto border-collapse border">

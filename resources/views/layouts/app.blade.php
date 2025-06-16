@@ -6,21 +6,19 @@
   <title>@yield('title', 'Biro Umum dan ASD SETDA DKI Jakarta')</title>
   @vite('resources/css/app.css')
 </head>
-<body class="flex flex-col min-h-screen text-white font-sans bg-black relative">
+<body class="flex flex-col min-h-screen text-white font-sans relative" style="background-image: url('{{ asset('img/batik.jpg') }}'); background-size: cover; background-position: center;";>
 
   <!-- Background Video -->
-  <video class="fixed top-0 left-0 w-full h-full object-cover -z-10" autoplay loop muted playsinline>
-    <source src="{{ asset('vid/balai.mp4') }}" type="video/mp4" />
-    Browser Anda tidak mendukung tag video.
-  </video>
+
 
   @include('partials.navbar')
 
- <main class="flex-grow flex justify-center items-center p-6 text-center">
-  <div class="w-4/5 max-w-3xl bg-white/60 p-5 rounded-xl shadow-lg mt-64 relative">
+<main class="flex-grow flex justify-center items-center p-6 text-center relative z-10">
+  <div class="w-4/5 max-w-3xl bg-white/95 p-5 rounded-xl shadow-lg mt-64 relative">
     @yield('content')
   </div>
 </main>
+
 
 
 

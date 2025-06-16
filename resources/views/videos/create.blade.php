@@ -14,22 +14,26 @@
         </div>
     @endif
 
-    <form action="{{ route('videos.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="title" class="form-label">Judul Video</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="video_url" class="form-label">URL Video</label>
-            <input type="url" name="video_url" id="video_url" class="form-control" value="{{ old('video_url') }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Deskripsi</label>
-            <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('videos.index') }}" class="btn btn-secondary">Batal</a>
-    </form>
+    <form action="{{ route('videos.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="mb-3">
+        <label for="title" class="form-label">Judul Video</label>
+        <input type="text" name="title" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="video_file" class="form-label">Upload Video</label>
+        <input type="file" name="video_file" class="form-control" accept="video/*">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Deskripsi</label>
+        <textarea name="description" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+</form>
+
+
 </div>
 @endsection
