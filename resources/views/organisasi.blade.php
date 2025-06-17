@@ -20,8 +20,8 @@
     {{-- Include Navbar --}}
     @include('partials.navbar')
 
-    <section class="container mx-auto p-6 flex-1">
-      <h1 class="text-3xl font-bold text-center mb-6 text-blue-900">Informasi Organisasi</h1>
+    <section class="flex-1 container mx-auto p-4 sm:p-6 lg:p-10">
+      <h1 class="text-4xl font-extrabold text-center text-blue-800 mb-8 drop-shadow-md animate-fade-in">Informasi Organisasi</h1>
       
       <!-- Tabs Navigation -->
       <div class="flex flex-wrap justify-center gap-4 mb-8">
@@ -32,9 +32,10 @@
         <button onclick="showTab('laporan', event)" class="tab-btn bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">Laporan Keuangan</button>
       </div>
 
+       <div class="bg-white/80 shadow-xl rounded-3xl p-6 space-y-12 border border-gray-200 transition duration-700 ease-in-out transform hover:scale-[1.01]">
       <!-- Struktur Organisasi -->
-      <div id="struktur" class="tab-content block animate-fade-in">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">Struktur Organisasi</h2>
+      <div id="struktur" class="tab-content text-center">
+        <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Struktur Organisasi</h2>
         @php
             $struktur = DB::table('struktur_organisasi')->latest('id')->first();
         @endphp
@@ -46,8 +47,8 @@
       </div>
 
       <!-- Kebijakan -->
-      <div id="kebijakan" class="tab-content hidden animate-fade-in">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">Kebijakan & Regulasi</h2>
+      <div id="kebijakan" class="tab-content hidden text-center">
+        <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Kebijakan & Regulasi</h2>
         @php $files = Storage::disk('public')->files('kebijakan'); @endphp
         @if(count($files) > 0)
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -68,8 +69,8 @@
       </div>
 
       <!-- Renstra -->
-      <div id="renstra" class="tab-content hidden animate-fade-in">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">Rencana Strategis (Renstra)</h2>
+      <div id="renstra" class="tab-content hidden text-center">
+        <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Rencana Strategis (Renstra)</h2>
         @php
           $renstraFiles = Storage::disk('public')->exists('renstra') ? Storage::disk('public')->files('renstra') : [];
         @endphp
@@ -92,8 +93,8 @@
       </div>
 
       <!-- LKIP -->
-      <div id="lkip" class="tab-content hidden animate-fade-in">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">Laporan Kinerja Instansi Pemerintah (LKIP)</h2>
+      <div id="lkip" class="tab-content hidden text-center">
+        <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Laporan Kinerja Instansi Pemerintah (LKIP)</h2>
         @if($lkips->count() > 0)
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($lkips as $lkip)
@@ -114,8 +115,8 @@
       </div>
 
       <!-- Laporan Keuangan -->
-      <div id="laporan" class="tab-content hidden animate-fade-in">
-        <h2 class="text-2xl font-semibold mb-4 text-blue-700">Laporan Keuangan</h2>
+      <div id="laporan" class="tab-content hidden text-center">
+        <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Laporan Keuangan</h2>
         @if($laporans->count() > 0)
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($laporans as $laporan)
@@ -134,6 +135,7 @@
           <p class="text-center text-gray-600">Tidak ada laporan keuangan.</p>
         @endif
       </div>
+       </div>
     </section>
 
     {{-- Include Footer --}}

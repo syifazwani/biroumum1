@@ -113,9 +113,10 @@ Route::delete('admin/strukturorganisasippid/delete/{id}', [StrukturOrganisasiPpi
 
 // Halaman publik
 Route::get('/informasi-balai', [InfoBalaiController::class, 'informasi']);
-Route::get('/balai/{slug}', [InfoBalaiController::class, 'show']);
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 // Admin (tanpa prefix dan tanpa modal)
+
 Route::get('/admin/balai', [InfoBalaiController::class, 'index']);
 Route::get('/admin/balai/create', [InfoBalaiController::class, 'create']);
 Route::post('/admin/balai', [InfoBalaiController::class, 'store']);
@@ -127,14 +128,17 @@ Route::get('/informasi/{id}', [InfoBalaiController::class, 'show'])->name('infor
 
 // Publik
 Route::get('/berita', [BeritaController::class, 'index']);
-Route::get('/berita/{slug}', [InfoBalaiController::class, 'show'])->name('berita.show');
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 // Admin
 Route::get('/admin/berita', [BeritaController::class, 'adminIndex'])->name('admin.berita.index');
 Route::get('/admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
 Route::post('/admin/berita/store', [BeritaController::class, 'store'])->name('admin.berita.store');
 Route::get('/admin/berita/{id}/edit', [BeritaController::class, 'edit'])->name('admin.berita.edit');
-Route::post('/admin/berita/{id}/update', [BeritaController::class, 'update'])->name('admin.berita.update');
+Route::put('admin/berita/{id}/update', [BeritaController::class, 'update'])->name('admin.berita.update');
+
+
+
 Route::delete('/admin/berita/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
 
 // admin foto

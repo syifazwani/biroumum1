@@ -19,8 +19,8 @@
     }
   </style>
 </head>
-<body class="bg-fixed bg-center bg-cover" style="background-image: url('{{ asset('img/batik.jpg') }}'); font-family: 'Segoe UI', sans-serif;">
-  <div class="min-h-screen flex flex-col bg-white/80 backdrop-blur-lg">
+<body class="bbg-fixed bg-center bg-cover text-gray-800" style="background-image: url('{{ asset('img/batik.jpg') }}'); font-family: 'Segoe UI', sans-serif;">
+  <div class="min-h-screen flex flex-col bg-white/90">
 
     @include('partials.navbar')
 
@@ -37,9 +37,9 @@
       @endphp
 
       <!-- Tabs -->
-      <div class="flex overflow-x-auto scrollbar-hide justify-center space-x-3 mb-8 px-4">
+      <div class="flex justify-center space-x-3 mb-8 px-4">
         @foreach ($tabs as $slug => $title)
-          <button onclick="showTab('{{ $slug }}', event)" class="tab-btn flex items-center gap-2 bg-blue-500 text-white rounded-full px-5 py-3 font-semibold shadow hover:bg-blue-600 hover:scale-105 transition duration-300">
+          <button onclick="showTab('{{ $slug }}', event)" class="tab-btn bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 active">
             {{ $title }}
           </button>
         @endforeach
@@ -49,7 +49,7 @@
       <div class="bg-white/80 shadow-xl rounded-3xl p-6 space-y-12 border border-gray-200 transition duration-700 ease-in-out transform hover:scale-[1.01]">
 
         {{-- Visi Misi --}}
-        <div id="visi-misi" class="tab-content hidden">
+        <div id="visi-misi" class="tab-content hidden text-center">
           <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Visi dan Misi</h2>
           @php $pdf = DB::table('visi_misi')->orderBy('created_at', 'desc')->first(); @endphp
           @if ($pdf)
@@ -63,7 +63,7 @@
         </div>
 
         {{-- Dasar Hukum --}}
-        <div id="dasar-hukum" class="tab-content hidden">
+        <div id="dasar-hukum" class="tab-content hidden text-center">
           <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Dasar Hukum</h2>
           @php $pdfs = DB::table('dasar_hukum')->orderBy('created_at', 'desc')->get(); @endphp
           @if ($pdfs->count() > 0)
@@ -82,7 +82,7 @@
         </div>
 
         {{-- Tugas dan Fungsi --}}
-        <div id="tugas-fungsi" class="tab-content hidden">
+        <div id="tugas-fungsi" class="tab-content hidden text-center">
           <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2 animate-fade-in-down">Tugas dan Fungsi</h2>
           @php $pdfs = DB::table('tugas_fungsi')->orderBy('created_at', 'desc')->get(); @endphp
           @if ($pdfs->count() > 0)

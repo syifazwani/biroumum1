@@ -23,6 +23,7 @@ class BeritaController extends Controller
         return view('admin.berita.show', compact('berita'));
     }
 
+
     public function adminIndex()
     {
         $beritas = Berita::latest()->get();
@@ -34,30 +35,26 @@ class BeritaController extends Controller
         return view('admin.berita.create');
     }
 
+
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image|max:2048',
+            'external_link' => 'required|url',
         ]);
 
         $slug = $this->createUniqueSlug($request->title);
 
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('berita_images', 'public');
-        }
-
         Berita::create([
             'title' => $request->title,
             'slug' => $slug,
-            'content' => $request->content,
-            'image' => $imagePath,
+            'content' => 'Berita selengkapnya bisa dibaca di: ' . $request->external_link,
+            'image' => null,
         ]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
+
 
 
     public function edit($id)
@@ -95,6 +92,7 @@ class BeritaController extends Controller
         ]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
+
     }
 
     public function destroy($id)
