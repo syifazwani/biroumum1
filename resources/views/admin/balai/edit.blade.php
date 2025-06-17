@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen py-10 px-4 bg-gray-100" style=" background-size: cover; background-position: center;">
+<div class="min-h-screen py-10 px-4 bg-gray-100" style="background-size: cover; background-position: center;">
   <div class="bg-white/95 rounded-lg p-8 max-w-3xl mx-auto shadow-md">
+    <a href="/admin/balai">
+        <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+            ← Kembali ke Admin Balai
+        </button>
+    </a>
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Konten Balai Kota</h2>
 
     <form action="/admin/balai/{{ $item->id }}" method="POST">
@@ -22,7 +27,7 @@
         <label for="image" class="block text-gray-700 font-medium mb-1">Path Gambar</label>
         <input type="text" name="image" id="image" value="{{ $item->image }}"
           class="w-full px-4 py-2 border border-gray-300 rounded bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required>
+         >
       </div>
 
       {{-- Konten --}}
@@ -47,4 +52,11 @@
     </form>
   </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('content');
+    </script>
 @endsection

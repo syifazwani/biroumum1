@@ -38,22 +38,20 @@ class BeritaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'external_link' => 'required|url',
-        ]);
+        
 
         $slug = $this->createUniqueSlug($request->title);
 
         Berita::create([
-            'title' => $request->title,
-            'slug' => $slug,
-            'content' => 'Berita selengkapnya bisa dibaca di: ' . $request->external_link,
-            'image' => null,
-        ]);
+    'title' => $request->title,
+    'slug' => $slug,
+    'content' => $request->content,
+    'image' => null,
+]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
+    
 
 
 

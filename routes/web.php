@@ -8,6 +8,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\RenstraController;
+use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\InfoBalaiController;
@@ -122,6 +123,7 @@ Route::get('/admin/balai/create', [InfoBalaiController::class, 'create']);
 Route::post('/admin/balai', [InfoBalaiController::class, 'store']);
 Route::get('/admin/balai/{id}/edit', [InfoBalaiController::class, 'edit']);
 Route::put('/admin/balai/{id}', [InfoBalaiController::class, 'update']);
+Route::get('/balai/{slug}', [InfoBalaiController::class, 'show'])->name('balai.show');
 Route::delete('/admin/balai/{id}', [InfoBalaiController::class, 'destroy']);
 Route::get('/informasi', [InfoBalaiController::class, 'informasi']);
 Route::get('/informasi/{id}', [InfoBalaiController::class, 'show'])->name('informasi.show');
@@ -135,8 +137,9 @@ Route::get('/admin/berita', [BeritaController::class, 'adminIndex'])->name('admi
 Route::get('/admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
 Route::post('/admin/berita/store', [BeritaController::class, 'store'])->name('admin.berita.store');
 Route::get('/admin/berita/{id}/edit', [BeritaController::class, 'edit'])->name('admin.berita.edit');
-Route::put('admin/berita/{id}/update', [BeritaController::class, 'update'])->name('admin.berita.update');
+Route::put('/admin/berita/{id}/update', [BeritaController::class, 'update'])->name('admin.berita.update');
 
+Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
 
 
 Route::delete('/admin/berita/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');

@@ -40,6 +40,7 @@
       document.getElementById("nav-menu").classList.toggle("hidden");
     });
   </script>
+    @yield('scripts')
 
 </body>
 </html>

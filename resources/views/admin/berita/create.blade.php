@@ -1,39 +1,82 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Berita - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-@section('content')
-<div class="max-w-xl mx-auto p-6 bg-white shadow rounded-lg">
-    <h1 class="text-2xl font-bold text-gray-800 mb-4">Tambah Berita Baru</h1>
+    @include('partials.navbaradmin')
 
-    <form action="{{ route('admin.berita.store') }}" method="POST" class="space-y-4">
-        @csrf
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 flex-grow">
+        <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg mt-4">
+            <a href="/admin/berita" 
+                   class="inline-flex items-center gap-2 px-4 py-2 bg-gray-300 text-gray-800 hover:bg-gray-400 rounded-lg transition">
+                    ← Kembali ke Admin Berita
+                </a>
+            <!-- Header -->
+            <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Tambah Berita</h1>
 
-        {{-- Input Judul --}}
-        <div>
-            <label for="title" class="block text-sm font-medium text-gray-700">Judul</label>
-            <input type="text" name="title" id="title"
-                   class="w-full px-4 py-2 border border-gray-300 rounded text-gray-900 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   required value="{{ old('title') }}">
+            @if ($errors->any())
+    <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <ul class="list-disc pl-5">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+            <!-- Form Tambah Berita -->
+            <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <!-- Judul -->
+                <div class="mb-4">
+                    <label for="title" class="block font-semibold text-gray-700 mb-2">Judul</label>
+                    <input type="text" name="title" id="title" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 focus:outline-none"
+                           value="{{ old('title') }}">
+                </div>
+
+                <!-- Konten -->
+                <div class="mb-6">
+                    <label for="content" class="block font-semibold text-gray-700 mb-2">Konten</label>
+                    <textarea name="content" id="content" rows="10"
+                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 focus:outline-none">{{ old('content') }}</textarea>
+                </div>
+
+                <!-- Tombol Simpan -->
+                <div class="flex justify-end">
+                    <button type="submit"
+                            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Simpan
+                    </button>
+                </div>
+            </form>
+
         </div>
+    </main>
 
-        {{-- Input Link Eksternal --}}
-        <div>
-            <label for="external_link" class="block text-sm font-medium text-gray-700">Link Eksternal Berita</label>
-            <input type="url" name="external_link" id="external_link" placeholder="https://..."
-                   class="w-full px-4 py-2 border border-gray-300 rounded text-gray-900 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   required value="{{ old('external_link') }}">
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-4 mt-8">
+        <div class="container mx-auto text-center text-sm">
+            &copy; 2025 Biro Umum & ASD SETDA DKI Jakarta. All rights reserved.
         </div>
+    </footer>
 
-        {{-- Tombol Aksi --}}
-        <div class="flex items-center gap-3 pt-2">
-            <button type="submit"
-                    class="px-5 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
-                Simpan
-            </button>
-            <a href="{{ route('admin.berita.index') }}"
-               class="px-5 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
-                Batal
-            </a>
-        </div>
-    </form>
-</div>
-@endsection
+    <!-- CKEditor -->
+   <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?_token={{ csrf_token() }}",
+        filebrowserUploadMethod: 'form'
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,70 +1,24 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Renstra - Admin Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex flex-col" style="background-image: url('{{ asset('img/batik.jpg') }}'); background-size: cover; background-position: center;">
+@extends('layouts.app')
 
-    @include('partials.navbaradmin')
+@section('content')
+<div class="p-6">
+    <a href="{{ route('admin.renstra') }}">
+      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+        ← Kembali ke Admin Renstra
+      </button>
+    </a>
+    <h2 class="text-2xl font-bold mb-4">Edit File Renstra</h2>
 
-    <main class="container mx-auto p-6 flex-grow">
-        <div class="max-w-3xl mx-auto p-6 rounded-xl shadow-lg bg-white mt-4">
+    <form action="{{ route('admin.renstra.update', $file->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
-            <a href="{{ route('admin.renstra') }}">
-                <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2 transition">
-                    ← Kembali ke Admin Renstra
-                </button>
-            </a>
+        <label class="block mb-2">Nama File Baru</label>
+        <input type="text" name="nama_file" value="{{ $file->nama_file }}" class="border p-2 rounded w-full mb-4" required>
 
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Edit File Renstra</h2>
+        <label class="block mb-2">Ganti File (opsional)</label>
+        <input type="file" name="file" class="border p-2 rounded w-full mb-4">
 
-            {{-- Pesan Error (Jika Ada) --}}
-            @if ($errors->any())
-                <div class="bg-red-100 border border-red-400 text-red-800 p-3 rounded mb-4">
-                    <ul class="list-disc pl-5 space-y-1">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="{{ route('admin.renstra.update', $file->id) }}" method="POST" enctype="multipart/form-data" 
-                class="space-y-4">
-                @csrf
-                @method('PUT')
-
-                <div>
-                    <label class="block mb-1 text-gray-700 font-medium">Nama File Baru</label>
-                    <input type="text" name="nama_file" value="{{ $file->nama_file }}" required
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-gray-800 bg-white focus:ring focus:ring-blue-300 focus:outline-none">
-                </div>
-
-                <div>
-                    <label class="block mb-1 text-gray-700 font-medium">Ganti File (opsional)</label>
-                    <input type="file" name="file" 
-                        class="w-full border border-gray-300 rounded px-3 py-2 text-gray-800 bg-white focus:ring focus:ring-blue-300 focus:outline-none">
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" 
-                        class="bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700 transition">
-                        Update
-                    </button>
-                </div>
-            </form>
-
-        </div>
-    </main>
-
-    <footer class="bg-blue-800 text-white py-4 mt-8">
-        <div class="container mx-auto text-center text-sm">
-            &copy; 2025 Biro Umum & ASD SETDA DKI Jakarta. All rights reserved.
-        </div>
-    </footer>
-
-</body>
-</html>
+        <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Update</button>
+    </form>
+</div>
+@endsection
