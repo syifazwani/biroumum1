@@ -12,7 +12,7 @@
 
     <main class="container mx-auto p-6 flex-grow">
         <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-4">
-            <a href="/admin/berita" 
+            <a href="/admin/berita"
                    class="inline-flex items-center gap-2 px-4 py-2 bg-gray-300 text-gray-800 hover:bg-gray-400 rounded-lg transition">
                     ← Kembali ke Admin Berita
                 </a>
@@ -58,19 +58,6 @@
                               required>{{ old('content', $berita->content) }}</textarea>
                 </div>
 
-                <!-- Gambar -->
-                <div class="mb-4">
-                    <label for="image" class="block text-sm font-medium text-gray-700">Gambar (Opsional)</label>
-                    <input type="file" name="image" id="image"
-                           class="w-full px-4 py-2 border border-gray-300 rounded bg-white">
-                    @if ($berita->image)
-                        <div class="mt-2">
-                            <p class="text-sm text-gray-600">Gambar saat ini:</p>
-                            <img src="{{ asset('storage/' . $berita->image) }}" alt="Gambar Berita" class="h-32 rounded shadow">
-                        </div>
-                    @endif
-                </div>
-
                 <!-- Tombol -->
                 <div class="flex items-center gap-3 pt-2">
                     <button type="submit"
@@ -92,11 +79,15 @@
         </div>
     </footer>
 
-    <!-- CKEditor -->
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
+   <!-- CKEditor -->
+<script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?_token={{ csrf_token() }}",
+        filebrowserUploadMethod: 'form',
+        removePlugins: 'image2', // gunakan image klasik yang lebih fleksibel
+    });
+</script>
 
 </body>
 </html>

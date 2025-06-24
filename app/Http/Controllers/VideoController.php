@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Models\HeroSlider;
 
 class VideoController extends Controller
 {
@@ -21,12 +22,12 @@ class VideoController extends Controller
 
     public function showVideoGallery()
     {
-        // Ambil semua data video dari tabel 'videos'
+        $sliders = HeroSlider::latest()->get();
         $videos = DB::table('videos')->get();
 
-        // Kirim data ke view
-        return view('galeri.video', compact('videos'));
+        return view('galeri.video', compact('videos', 'sliders'));
     }
+
 
     public function store(Request $request)
     {

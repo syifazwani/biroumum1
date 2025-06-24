@@ -47,9 +47,9 @@
     @if(count($lkips) > 0)
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
         @foreach($lkips as $lkip)
-        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-4">
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition p-4 flex flex-col">
             <h4 class="text-lg font-semibold mb-2 text-gray-800 truncate">📄 {{ $lkip->judul }}</h4>
-            <p class="text-sm text-gray-600 mb-3">{{ $lkip->deskripsi }}</p>
+            <p class="text-sm text-gray-600 mb-3 line-clamp-3">{{ $lkip->deskripsi }}</p>
 
             {{-- Preview PDF --}}
             <div class="h-48 border border-gray-300 mb-3 rounded overflow-hidden bg-gray-50">
@@ -58,7 +58,7 @@
                     class="w-full h-full" frameborder="0"></iframe>
             </div>
 
-            <div class="flex justify-between text-sm mt-2">
+            <div class="flex justify-between text-sm mt-auto">
                 <a href="{{ asset('storage/' . $lkip->file_path) }}" target="_blank" class="text-blue-600 hover:underline">
                     Lihat
                 </a>

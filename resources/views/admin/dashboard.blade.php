@@ -92,6 +92,14 @@
                 </button>
             </div>
 
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">hero-slider</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <button class="bg-gray-600 text-white text-lg font-semibold py-6 rounded-xl shadow hover:bg-gray-700 transition"
+                    onclick="location.href='{{ route('hero-slider.index') }}'">
+                    slider
+                </button>
+            </div>
+
         </div>
     </main>
 

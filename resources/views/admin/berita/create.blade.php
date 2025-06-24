@@ -13,7 +13,7 @@
     <!-- Main Content -->
     <main class="container mx-auto p-6 flex-grow">
         <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-lg mt-4">
-            <a href="/admin/berita" 
+            <a href="/admin/berita"
                    class="inline-flex items-center gap-2 px-4 py-2 bg-gray-300 text-gray-800 hover:bg-gray-400 rounded-lg transition">
                     ← Kembali ke Admin Berita
                 </a>
@@ -69,12 +69,15 @@
     </footer>
 
     <!-- CKEditor -->
-   <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+   <script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+
 <script>
     CKEDITOR.replace('content', {
-        filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?_token={{ csrf_token() }}",
-        filebrowserUploadMethod: 'form'
-    });
+    filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?_token={{ csrf_token() }}",
+    filebrowserUploadMethod: 'form',
+    removePlugins: 'image2', // agar tidak terlalu dibatasi
+});
+
 </script>
 
 

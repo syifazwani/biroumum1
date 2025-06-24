@@ -38,20 +38,20 @@ class BeritaController extends Controller
 
     public function store(Request $request)
     {
-        
+
 
         $slug = $this->createUniqueSlug($request->title);
 
         Berita::create([
-    'title' => $request->title,
-    'slug' => $slug,
-    'content' => $request->content,
-    'image' => null,
-]);
+            'title' => $request->title,
+            'slug' => $slug,
+            'content' => $request->content,
+            'image' => null,
+        ]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
-    
+
 
 
 
@@ -65,33 +65,36 @@ class BeritaController extends Controller
     {
         $berita = Berita::findOrFail($id);
 
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image|max:2048',
+            'external_link' => 'nullable|url',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
 
-        $slug = $this->createUniqueSlug($request->title, $id);
+        $berita->title = $validated['title'];
+        $berita->external_link = $validated['external_link'] ?? null;
+        $berita->content = $validated['content'];
 
-        $imagePath = $berita->image;
-        if ($request->hasFile('image')) {
-            // Optional: delete old image
-            if ($berita->image) {
-                Storage::disk('public')->delete($berita->image);
-            }
-            $imagePath = $request->file('image')->store('berita_images', 'public');
+        // Hapus gambar jika diminta
+        if ($request->has('hapus_gambar') && $berita->image) {
+            Storage::delete('public/' . $berita->image);
+            $berita->image = null;
         }
 
-        $berita->update([
-            'title' => $request->title,
-            'slug' => $slug,
-            'content' => $request->content,
-            'image' => $imagePath,
-        ]);
+        // Simpan gambar baru jika diupload
+        if ($request->hasFile('image')) {
+            if ($berita->image) {
+                Storage::delete('public/' . $berita->image);
+            }
+            $berita->image = $request->file('image')->store('berita_images', 'public');
+        }
+
+        $berita->save();
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui.');
-
     }
+
 
     public function destroy($id)
     {

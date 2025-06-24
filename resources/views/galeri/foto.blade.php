@@ -5,9 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Galeri Album - Biro Umum & ASD SETDA DKI Jakarta</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+
 </head>
 @include('partials.navbar')
 <body class="min-h-screen bg-gray-100 text-black font-sans" style="background-image: url('{{ asset('img/batik.jpg') }}'); background-size: cover; background-position: center;">
+
+<section class="relative rounded-3xl overflow-hidden shadow-lg h-[400px]" data-aos="fade-down">
+  <div class="swiper heroSwiper h-full w-full">
+    <div class="swiper-wrapper h-full">
+        @forelse ($sliders as $slider)
+            <div class="swiper-slide bg-cover bg-center h-full w-full" style="background-image: url('{{ asset('storage/' . $slider->image_path) }}');"></div>
+        @empty
+            <div class="swiper-slide flex justify-center items-center bg-gray-300 text-gray-600">
+                Tidak ada slider ditemukan
+            </div>
+        @endforelse
+
+        @if (count($sliders) === 1)
+            {{-- Duplikat 1 slide agar Swiper bisa autoplay --}}
+            <div class="swiper-slide bg-cover bg-center h-full w-full" style="background-image: url('{{ asset('storage/' . $sliders[0]->image_path) }}');"></div>
+        @endif
+
+    </div>
+  </div>
+</section>
+
 
   <div class="min-h-screen w-full bg-white/90 flex flex-col items-center py-10">
 
@@ -119,5 +144,21 @@
     document.getElementById('lightbox').addEventListener('click', closeLightbox);
     document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
   </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".heroSwiper", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      effect: "fade",
+      speed: 1000,
+    });
+  });
+</script>
+
+
+
 </body>
 </html>

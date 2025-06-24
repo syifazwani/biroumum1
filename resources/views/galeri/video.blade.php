@@ -6,13 +6,37 @@
   <title>Galeri Foto & Video</title>
   @vite(['resources/css/app.css'])
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </head>
 <body class="bg-gray-100 text-black flex flex-col min-h-screen font-sans" style="background-image: url('{{ asset('img/batik.jpg') }}'); background-size: cover; background-position: center;">
+
+
   <div class="flex flex-col min-h-screen bg-white/95">
 
   @include('partials.navbar')
 
+  <section class="relative rounded-3xl overflow-hidden shadow-lg h-[400px]" data-aos="fade-down">
+  <div class="swiper heroSwiper h-full w-full">
+    <div class="swiper-wrapper h-full">
+             @forelse ($sliders as $slider)
+        <div class="swiper-slide bg-cover bg-center h-full w-full" style="background-image: url('{{ asset('storage/' . $slider->image_path) }}');"></div>
+        @empty
+        <div class="swiper-slide flex justify-center items-center bg-gray-300 text-gray-600">
+            Tidak ada slider ditemukan
+        </div>
+        @endforelse
+
+        @if (count($sliders) === 1)
+        {{-- Duplikat 1 slide agar Swiper bisa autoplay --}}
+        <div class="swiper-slide bg-cover bg-center h-full w-full" style="background-image: url('{{ asset('storage/' . $sliders[0]->image_path) }}');"></div>
+        @endif
+    </div>
+  </div>
+</section>
+
     <div class="min-h-screen w-full flex flex-col items-center py-10">
+
 
 <h1 class="text-4xl font-extrabold text-blue-800 items-center drop-shadow-lg animate-fade-in">Galeri Album</h1>
 
@@ -73,6 +97,19 @@
       document.querySelectorAll('.media-grid').forEach(g => g.classList.add('hidden'));
     }
   </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".heroSwiper", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      effect: "fade",
+      speed: 1000,
+    });
+  });
+</script>
 
 </body>
 </html>

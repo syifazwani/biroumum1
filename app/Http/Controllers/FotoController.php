@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\AlbumPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Models\HeroSlider;
 use Illuminate\Support\Facades\Storage;
 
 class FotoController extends Controller
@@ -41,10 +42,12 @@ class FotoController extends Controller
 
     public function tampilGaleri()
     {
+        $sliders = HeroSlider::latest()->get();
         $albums = Album::with('photos')->get();
 
-        return view('galeri.foto', compact('albums'));
+        return view('galeri.foto', compact('albums', 'sliders'));
     }
+
 
     public function edit($id)
     {

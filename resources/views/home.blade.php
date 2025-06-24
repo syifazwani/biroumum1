@@ -15,13 +15,18 @@
 
     <main class="container mx-auto px-10 py-10 space-y-20">
       <!-- Hero Section -->
-<section class="relative rounded-3xl overflow-hidden shadow-lg h-[300px] md:h-[400px]" data-aos="fade-down">
+    <section class="relative rounded-3xl overflow-hidden shadow-lg h-[300px] md:h-[400px]" data-aos="fade-down">
         <div class="swiper heroSwiper h-full w-full">
           <div class="swiper-wrapper">
-            <div class="swiper-slide bg-cover bg-center" style="background-image: url('{{ asset('img/DJI_0135.jpg') }}');"></div>
-            <div class="swiper-slide bg-cover bg-center" style="background-image: url('{{ asset('img/DJI_0119.jpg') }}');"></div>
-            <div class="swiper-slide bg-cover bg-center" style="background-image: url('{{ asset('img/DJI_0135.jpg') }}');"></div>
-          </div>
+  @forelse ($sliders as $slider)
+    <div class="swiper-slide bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $slider->image_path) }}');"></div>
+  @empty
+    <div class="swiper-slide flex justify-center items-center bg-gray-200 text-gray-500">
+      Tidak ada slider ditemukan
+    </div>
+  @endforelse
+</div>
+
         </div>
         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center px-6">
           <h1 class="text-3xl md:text-5xl font-bold mb-2">Biro Umum dan Administrasi Sekretariat Daerah</h1>

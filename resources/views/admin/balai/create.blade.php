@@ -50,8 +50,13 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
+<script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?_token={{ csrf_token() }}",
+        filebrowserUploadMethod: 'form',
+        removePlugins: 'image2', // gunakan image klasik yang lebih fleksibel
+    });
+</script>
+
 @endsection

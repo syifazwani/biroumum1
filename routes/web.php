@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\HeroSlider;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\LkipController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\InfoBalaiController;
 use App\Http\Controllers\KebijakanController;
 use App\Http\Controllers\DasarHukumController;
+use App\Http\Controllers\HeroSliderController;
 use App\Http\Controllers\OrganisasiController;
 use App\Http\Controllers\TugasFungsiController;
 use App\Http\Controllers\LaporanKeuanganController;
@@ -23,8 +25,11 @@ use App\Http\Controllers\StrukturOrganisasiPpidController;
 // Routes untuk User/Public
 // ========================
 
+// Tampilkan loadingpage saat pertama
 Route::view('/', 'loadingpage')->name('loadingpage');
-Route::view('/home', 'home')->name('home');
+
+Route::get('/home', [HeroSliderController::class, 'showHome'])->name('home');
+Route::get('/gallery', [HeroSliderController::class, 'showGallery'])->name('gallery');
 Route::view('/organisasi', 'organisasi')->name('organisasi');
 Route::get('/organisasi', [OrganisasiController::class, 'index'])->name('organisasi');
 Route::view('/informasi', 'informasi')->name('informasi');
@@ -171,3 +176,12 @@ Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
 Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit');
 Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update');
 Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy');
+
+Route::get('/admin/hero-slider', [HeroSliderController::class, 'index'])->name('hero-slider.index');
+Route::get('/admin/hero-slider/create', [HeroSliderController::class, 'create'])->name('hero-slider.create');
+Route::post('/admin/hero-slider', [HeroSliderController::class, 'store'])->name('hero-slider.store');
+Route::get('/admin/hero-slider/{heroSlider}/edit', [HeroSliderController::class, 'edit'])->name('hero-slider.edit');
+Route::put('/admin/hero-slider/{heroSlider}', [HeroSliderController::class, 'update'])->name('hero-slider.update');
+Route::delete('/admin/hero-slider/{heroSlider}', [HeroSliderController::class, 'destroy'])->name('hero-slider.destroy');
+
+Route::post('/ckeditor/upload', [App\Http\Controllers\CKEditorController::class, 'upload'])->name('ckeditor.upload');
