@@ -62,44 +62,44 @@
         </div>
 
         {{-- Kebijakan --}}
-        <div id="kebijakan" class="tab-content hidden text-center">
-          <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2">Kebijakan & Regulasi</h2>
-          @php $files = Storage::disk('public')->files('kebijakan'); @endphp
-          @if(count($files) > 0)
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              @foreach($files as $file)
-                <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 shadow-lg hover:scale-105 transition space-y-3 animate-fade-in">
-                  <div class="font-semibold text-gray-700 truncate">{{ basename($file) }}</div>
-                  <iframe src="{{ asset('storage/' . $file) }}" class="w-full h-[250px] rounded shadow border"></iframe>
-                  <a href="{{ asset('storage/' . $file) }}" target="_blank" class="block text-center px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition">Download PDF</a>
-                </div>
-              @endforeach
-            </div>
-          @else
-            <p class="text-gray-600 italic animate-pulse">Belum ada dokumen kebijakan.</p>
-          @endif
+<div id="kebijakan" class="tab-content hidden text-center">
+  <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2">Kebijakan & Regulasi</h2>
+
+  @if(isset($kebijakans) && count($kebijakans) > 0)
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @foreach($kebijakans as $kebijakan)
+        <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 shadow-lg hover:scale-105 transition space-y-3 animate-fade-in">
+          <div class="font-semibold text-gray-700 truncate">{{ $kebijakan->judul }}</div>
+          <iframe src="{{ asset('storage/' . $kebijakan->file_path) }}" class="w-full h-[250px] rounded shadow border"></iframe>
+          <a href="{{ asset('storage/' . $kebijakan->file_path) }}" target="_blank" class="block text-center px-4 py-2 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition">Download PDF</a>
         </div>
+      @endforeach
+    </div>
+  @else
+    <p class="text-gray-600 italic animate-pulse">Belum ada dokumen kebijakan.</p>
+  @endif
+</div>
+
 
         {{-- Renstra --}}
-        <div id="renstra" class="tab-content hidden text-center">
-          <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2">Renstra</h2>
-          @php
-            $files = Storage::disk('public')->files('renstra');
-          @endphp
-          @if(count($files) > 0)
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              @foreach($files as $file)
-                <div class="bg-green-50 border border-green-200 rounded-2xl p-4 shadow-lg hover:scale-105 transition space-y-3 animate-fade-in">
-                  <div class="font-semibold text-gray-700 truncate">{{ basename($file) }}</div>
-                  <iframe src="{{ asset('storage/' . $file) }}" class="w-full h-[250px] rounded shadow border"></iframe>
-                  <a href="{{ asset('storage/' . $file) }}" target="_blank" class="block text-center px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition">Download PDF</a>
-                </div>
-              @endforeach
-            </div>
-          @else
-            <p class="text-gray-600 italic animate-pulse">Belum ada dokumen Renstra.</p>
-          @endif
+<div id="renstra" class="tab-content hidden text-center">
+  <h2 class="text-2xl font-bold text-blue-700 mb-4 border-b pb-2">Renstra</h2>
+
+  @if($renstras->count() > 0)
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @foreach($renstras as $renstra)
+        <div class="bg-green-50 border border-green-200 rounded-2xl p-4 shadow-lg hover:scale-105 transition space-y-3 animate-fade-in">
+          <div class="font-semibold text-gray-700 truncate">{{ $renstra->nama_file }}</div>
+          <iframe src="{{ asset('storage/' . $renstra->file_path) }}" class="w-full h-[250px] rounded shadow border"></iframe>
+          <a href="{{ asset('storage/' . $renstra->file_path) }}" target="_blank" class="block text-center px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition">Download PDF</a>
         </div>
+      @endforeach
+    </div>
+  @else
+    <p class="text-gray-600 italic animate-pulse">Belum ada dokumen Renstra.</p>
+  @endif
+</div>
+
 
         {{-- LKIP --}}
         <div id="lkip" class="tab-content hidden text-center">

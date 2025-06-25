@@ -1,24 +1,67 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Renstra - Biro Umum dan ASD DKI Jakarta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-black flex flex-col min-h-screen" style="background-image: url('{{ asset('img/batik.jpg') }}'); background-size: cover; background-position: center;">
 
-@section('content')
-<div class="p-6">
+  <div class="flex flex-col min-h-screen bg-white/95">
+    @include('partials.navbar')
+
+    <a href="{{ route('admin.dashboard') }}">
+        <button class="mt-4 ml-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+            ← Kembali ke Admin
+        </button>
+    </a>
+
     <a href="{{ route('admin.renstra') }}">
-      <button class="mb-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
+      <button class="mt-4 ml-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 text-gray-800 flex items-center gap-2">
         ← Kembali ke Admin Renstra
       </button>
     </a>
-    <h2 class="text-2xl font-bold mb-4">Edit File Renstra</h2>
 
-    <form action="{{ route('admin.renstra.update', $file->id) }}" method="POST" enctype="multipart/form-data">
+    <main class="container mx-auto px-6 py-10">
+      <h1 class="text-4xl font-bold text-center text-[#0077b6] mb-10" data-aos="fade-down">Edit File Renstra</h1>
+
+      <form action="{{ route('admin.renstra.update', $file->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow space-y-6 max-w-2xl mx-auto" data-aos="fade-up">
         @csrf
 
-        <label class="block mb-2">Nama File Baru</label>
-        <input type="text" name="nama_file" value="{{ $file->nama_file }}" class="border p-2 rounded w-full mb-4" required>
+        <div>
+          <label for="nama_file" class="block text-gray-700 font-medium mb-1">Nama File Baru</label>
+          <input type="text" name="nama_file" id="nama_file" value="{{ $file->nama_file }}" required
+                 class="w-full border border-gray-300 rounded px-3 py-2 bg-white focus:ring focus:ring-blue-300 focus:outline-none">
+        </div>
 
-        <label class="block mb-2">Ganti File (opsional)</label>
-        <input type="file" name="file" class="border p-2 rounded w-full mb-4">
+        <div>
+          <label for="file" class="block text-gray-700 font-medium mb-1">Ganti File (Opsional)</label>
+          <input type="file" name="file" id="file" accept=".pdf"
+                 class="w-full border border-gray-300 rounded px-3 py-2 bg-white focus:ring focus:ring-blue-300 focus:outline-none">
+        </div>
 
-        <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Update</button>
-    </form>
-</div>
-@endsection
+        @if ($file->file_path)
+        <p class="text-sm text-gray-600">
+          File Saat Ini: <a href="{{ asset('storage/' . $file->file_path) }}" target="_blank" class="text-blue-600 underline">
+            {{ basename($file->file_path) }}
+          </a>
+        </p>
+        @endif
+
+        <div class="text-center">
+          <button type="submit" class="bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700 transition">
+            Update
+          </button>
+        </div>
+      </form>
+    </main>
+
+    @include('partials.footer')
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 800, once: true });</script>
+</body>
+</html>
