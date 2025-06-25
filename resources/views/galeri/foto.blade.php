@@ -78,6 +78,8 @@
     <button id="nextBtn" class="absolute right-4 text-white text-4xl z-50">&#10095;</button>
   </div>
 
+  @include('partials.footer')
+
   <script>
     let currentPhotoIndex = 0;
     let photoList = [];

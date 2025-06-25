@@ -104,11 +104,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-800 text-white py-4 mt-8">
-        <div class="container mx-auto text-center text-sm">
-            &copy; 2025 Biro Umum & ASD SETDA DKI Jakarta. All rights reserved.
-        </div>
-    </footer>
+   @include('partials.footer')
 
 </body>
 </html>

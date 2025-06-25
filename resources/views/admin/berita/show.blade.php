@@ -24,7 +24,7 @@
 </head>
 <body class="bg-gradient-to-b from-gray-100 to-white min-h-screen flex flex-col">
 
-    @include('partials.navbar')
+    @include('partials.navbaradmin')
 
     <!-- Content -->
     <main class="container mx-auto p-6 flex-grow">
